@@ -1,0 +1,44 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+             xmlns:local="clr-namespace:WeatherwithAPI.ViewModel"
+             x:Class="WeatherwithAPI.MainPage">
+    <ContentPage.BindingContext>
+        <local:MainPageVM/>
+    </ContentPage.BindingContext>
+    
+    <StackLayout BackgroundColor="#175ECD">
+        <SearchBar SearchCommand="{Binding buscarData}"
+                   x:Name="search"
+                   SearchCommandParameter="{Binding Text, Source={x:Reference search}}"
+                   BackgroundColor="White"/>
+
+        <Label Text="{Binding Data.data[0].city_name}"
+                        TextColor="white"
+                        HorizontalTextAlignment="Center"
+                        VerticalTextAlignment="Center"
+                        FontSize="Title"/>
+
+        <Image Source="{Binding Data.data[0].weather.icon, StringFormat='https://www.weatherbit.io/static/img/icons/{0}.png'}"
+                       HeightRequest="150"
+                       WidthRequest="150"/>
+
+        .
+        <Label Text="{Binding Data.data[0].weather.description}"
+                       FontSize="20"
+                       TextColor="white"
+               HorizontalOptions="Center"/>
+
+
+        <Frame BackgroundColor="#35BB15"
+               VerticalOptions="EndAndExpand">
+            <StackLayout >
+                    <Label Text="{Binding Data.data[0].wind_spd, StringFormat='Velocidad de viento: {0}'}"
+                       TextColor="White"/>
+                    <Label Text="{Binding Data.data[0].rh, StringFormat='Humedad relativa: {0}' }"
+                       TextColor="White"/>
+            </StackLayout>
+        </Frame>
+    </StackLayout>
+    
+</ContentPage>
